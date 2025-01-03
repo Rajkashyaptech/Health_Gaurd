@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
 import os
 import pickle
 import streamlit as st
 from streamlit_option_menu import option_menu
 
 # set page configuration
-st.set_page_config(page_title = "Health Gaurd", layout = "wide")
+st.set_page_config(page_title = "Health Gaurd", layout = "wide", page_icon = "🧑‍⚕️")
 
 # path of working directory
 working_dir = os.path.dirname(os.path.abspath(__file__))
@@ -16,7 +17,7 @@ parkinsons_model = pickle.load(open('parkinsons_SVM/parkinsons_model.sav', 'rb')
 
 # sidebar for navigation
 with st.sidebar:
-    selected = option_menu("Multiple Disease Prediction System", ["Diabetes Disease Prediction", "Heart Disease Prediction", "Parkinson's Disease Prediction"], menu_icon = "hospital-fill", icons = ["activity", "heart", "person"], default_index = 0)
+    selected = option_menu("Multiple Disease Prediction System", ["Diabetes Disease Prediction", "Heart Disease Prediction", "Parkinson's Disease Prediction", "Breast Cancer Prediction"], menu_icon = "hospital-fill", icons = ["activity", "heart", "person",], default_index = 0)
 
 # diabetes prediction page
 if selected == "Diabetes Disease Prediction":
@@ -177,8 +178,6 @@ if selected == "Parkinson's Disease Prediction":
             
             if any(x == '' or x is None for x in user_input):
                 st.error("All fields except 'Name' and 'Status' are required. Please provide valid inputs.")
-            elif status == "Select":
-                st.error("Please select the patient's health status.")
             else:
                 # Convert inputs to float
                 user_input = [float(x) for x in user_input]
@@ -195,3 +194,7 @@ if selected == "Parkinson's Disease Prediction":
             st.error("Invalid input! Ensure all inputs are numeric, except for 'Name' and 'Status'.")
 
 
+# Breast Cancer Prediction page
+if selected == "Breast Cancer Prediction":
+    st.title("Breast Cancer Prediction coming soon...")
+    st.write("This feature is under development.")
